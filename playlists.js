@@ -5,6 +5,14 @@
 // ==/ClosureCompiler==
 /* global require */
 
+/**
+ * This is a quick'n'dirty tool for extracting your playlists from plug
+ * At the moment it's set up to dump all your youtube IDs in a format
+ *  that MPickering's Plug Playlist Uploader (https://github.com/mpickering/plug-playlist-uploader) can use
+ * In order to make SC links work, you need to require app/utils/SC as plugsc (or w/e) and use something like
+ *   plugsc.sc.get('/tracks/99490211', function() { console.log(Date.now(), arguments[0].permalink_url); } );
+ * to get the URL. Unfortunately this is completely async. >:( 
+ */
 require( [ 'underscore', 'app/store/LocalStorage', 'jquery' ], function( _, ls, $ )
 {
     'use strict';
@@ -40,7 +48,8 @@ require( [ 'underscore', 'app/store/LocalStorage', 'jquery' ], function( _, ls, 
     );
     _.each( playlists, function( playlist )
     {
-        var links = _(playlist.items).chain().filter(function(item)
+        var links = _(playlist.items).chain()
+        .filter(function(item)
         {
             return '1' === item.substr(0, 1);
         })

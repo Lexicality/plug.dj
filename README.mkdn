@@ -1,0 +1,5 @@
+Plug.DJ Stuff
+=============
+
+This is just a collection of scripts n stuff I've done for plug.dj
+No warranties.

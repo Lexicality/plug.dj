@@ -5,6 +5,9 @@
 // ==/ClosureCompiler==
 /* global jQuery, _, API */
 
+/**
+ * A super basic version of the DnB Stats bot
+ */
 (function( $, _, plug )
 {
 	'use strict';
