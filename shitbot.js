@@ -106,7 +106,7 @@
 			if ( ! this.chats || 'message' !== data.type )
 				return;
 			var message = data.message;
-			if ( '.' === message ) {
+			if ( '.' === message && this.chats > 2 ) {
 				this.doChat( '.' );
 			}
 			if ( ';' !== message.substring(0, 1) )
