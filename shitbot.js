@@ -90,7 +90,7 @@
 		onCurate: function( data )
 		{
 			var title = 'this track';
-			if ( this.chats > 1 )
+			if ( this.chats > 4 )
 				title = plug.getMedia().title;
 			console.log( 'on Curate', data, title );
 			this.doChat( data.user.username, ' snatched ', title, '!' );
