@@ -14,7 +14,7 @@
 	if ( window.shitbot )
 		window.shitbot.seppuku();
 	var shitbot = window.shitbot = {
-		version: '0.3',
+		version: '0.4',
 
 		currentTrack: null,
 
@@ -80,11 +80,23 @@
 		onAdvance: function( data )
 		{
 			console.log( 'on advance', data );
+			var message = [];
 			if ( this.currentTrack ) {
-				this.doChat( 'Last track got ', this.currentTrack.positive, ' woots, ', this.currentTrack.negative, ' mehs and ', this.currentTrack.curates, ' snatches!'  );
+				var track = this.currentTrack;
 				this.currentTrack = null;
+				var numusers = plug.getUsers().length - 1;
+				message.push(
+					'Last track got a ',
+					Math.floor( ( track.positive / numusers ) * 100 ),
+					'% approval rating'
+				);
+				if ( track.negative )
+					message.push( ' with ', track.negative, ' mehs' );
+				if ( track.curates )
+					message.push( ' and ', track.curate, ' snatches' );
+				message.push( '! ' );
 			}
-			this.doChat( 'Up Next: ', data.dj.username, ' with "', data.media.title, '" by ', data.media.author );
+			this.doChat( message.join(''), 'Up Next: ', data.dj.username, ' with "', data.media.title, '" by ', data.media.author );
 		},
 
 		onCurate: function( data )
@@ -129,7 +141,7 @@
 			plug.on( plug.CURATE_UPDATE, this.onCurate, this );
 			plug.on( plug.DJ_ADVANCE, this.onAdvance, this );
 			plug.on( plug.CHAT, this.onChat, this );
-			this.doChat( 'Shitbot v', this.version, ' now online!' );
+			this.doChat( 'Shitbot v', this.version, ' now online! (Now with 50% less spam)' );
 		},
 
 		seppuku: function()
