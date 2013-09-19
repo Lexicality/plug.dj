@@ -84,7 +84,7 @@
 			if ( this.currentTrack ) {
 				var track = this.currentTrack;
 				this.currentTrack = null;
-				var numusers = plug.getUsers().length - 1;
+				var numusers = plug.getUsers().length - 2;
 				message.push(
 					'Last track got a ',
 					Math.floor( ( track.positive / numusers ) * 100 ),
